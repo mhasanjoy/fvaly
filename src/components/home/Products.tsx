@@ -1,18 +1,20 @@
 import Product from 'components/common/Product';
+import { IProduct } from 'Models/types';
 import { Container, Row } from 'react-bootstrap';
 
-const Products = () => {
+interface IProps {
+  products: IProduct[];
+}
+
+const Products = ({ products }: IProps) => {
   return (
     <div className="my-5">
       <Container>
         <h2 className="mb-4">Latest Products</h2>
         <Row>
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
-          <Product />
+          {products.map((product: IProduct) => (
+            <Product key={product._id} product={product} />
+          ))}
         </Row>
       </Container>
     </div>
