@@ -1,23 +1,24 @@
 import { IProduct } from 'Models/types';
 import { Card, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import imageUrlParser from 'utilities/imageUrlParser';
 
 interface IProps {
   product: IProduct;
 }
 
 const Product = (props: IProps) => {
-  const { name, image } = props.product;
+  const { name, image, _id } = props.product;
   return (
     <Col md={3} className="mb-3">
-      <Card>
-        <Card.Img
-          variant="top"
-          src={`${process.env.REACT_APP_IMAGE_BASE_URL}${image}`}
-        />
-        <Card.Body>
-          <Card.Title>{name}</Card.Title>
-        </Card.Body>
-      </Card>
+      <Link to={`/product/${_id}`}>
+        <Card className="h-100">
+          <Card.Img variant="top" src={imageUrlParser(image)} />
+          <Card.Body>
+            <Card.Text>{name}</Card.Text>
+          </Card.Body>
+        </Card>
+      </Link>
     </Col>
   );
 };
